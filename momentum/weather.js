@@ -1,9 +1,19 @@
 const COORDS = 'coords';
 
+function saveCoords(coordsObj){
+    localStorage.setItem(COORDS, JSON.stringify(coordsObj));
+}
 
 function handleGeoSucces(position){
     //getCurrentPosition() 사용 하는 함수 handleGeoSucces
-    console.log(position);
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    const coordsObj = {
+        // key value 가 같을때는 하나만 사용해도 됨
+        latitude,
+        longitude: longitude
+    };
+    saveCoords(coordsObj);
 }
 
 function handdleGeoError(){
