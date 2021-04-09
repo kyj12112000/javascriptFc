@@ -90,11 +90,77 @@ function init() {
         })
     }
 
+    const fillStyle = new ol.style.Fill({
+        color: [84,118,255,1]
+    })
+
+    const strokeStyle = new ol.style.Stroke({
+        color: [46, 45, 45, 1],
+        width: 1.2
+    })
+
+    const circleStyle = new ol.style.Circle({
+        fill: new ol.style.Fill({
+            color : [245, 49,5,1]
+        }),
+        radius: 7,
+        storke: strokeStyle
+    })
+
     //vector Layer
-    const EUCountriesGeoJSON = new ol.layer.VectorImage({
+    const CountriesGeoJSON = new ol.layer.VectorImage({
         source: new ol.source.Vector({
-            url:
+            url: './data/vector_data/country.geojson',
+            format: new ol.format.GeoJSON()
+            
+        }),
+        visible: true,
+        title: 'CountriesGeoJSON',
+        style: new ol.style.Style({
+            fill : fillStyle,
+            stroke: strokeStyle,
+            image: circleStyle
         })
+
+
+    })
+    
+    map.addLayer(CountriesGeoJSON);
+    //위에 vector로 그린 pixel에서 작용
+    //Vector Feature Popup Logic
+
+    const overlayContainerElement = document.querySelector('.overlay-container');
+    console.log(overlayContainerElement);
+    const overlayLayer = new ol.Overlay({
+        element: overlayContainerElement
+    });
+
+    map.addOverlay(overlayLayer);
+    const overlayFeatureName = document.getElementById('feature-name');
+    const overlayFeatureAdditionInfo = document.getElementById('feature-additional-info');
+    console.log('1111'+overlayFeatureName);
+    map.on('click',function(e){
+       //다른곳 클릭시사라지게 하기
+        overlayLayer.setPosition(undefined);
+        // console.log(e);
+        map.forEachFeatureAtPixel(e.pixel, function(feature, layer){
+            // console.log(feature.getKeys()); //key 값들 가져오기
+            //name 과 추출 정보들을 가지고 pop 로직 생성
+            let clickedCoordinate = e.coordinate;
+            let clickedFeatureName =  feature.get('name');
+            console.log(typeof clickedFeatureName);
+            let clickedFeatureAdditionInfo =  feature.get('additionalinfo');
+            // console.log('clickedFeatureName : '+clickedFeatureName, 'clickedFeatureAdditionInfo : '+clickedFeatureAdditionInfo);
+            overlayLayer.setPosition(clickedCoordinate);
+            overlayFeatureName.innerHTML = clickedFeatureName;
+            overlayFeatureAdditionInfo.innerHTML = clickedFeatureAdditionInfo;
+        },
+        {//layerfilter 마지막에 한거임
+            layerFilter: function(layerCandidate){
+                return layerCandidate.get('title') === 'CountriesGeoJSON'
+            }
+        }
+        );
     })
 
 }
