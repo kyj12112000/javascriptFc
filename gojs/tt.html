@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Resizable - Snap to grid</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <style>
+        div#aaa div{
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="aaa">
+
+        <div data-id="1" class="ui-widget-content draggable">
+            <p>Drag me </p>
+        </div>
+        <div data-id="2" class="ui-widget-content draggable">
+            <p>Drag me </p>
+        </div>
+        <div data-id="3" class="ui-widget-content draggable">
+            <p>Drag me </p>
+        </div>
+        <div data-id="4" class="ui-widget-content draggable">
+            <p>Drag me</p>
+        </div>
+        <div data-id="5" class="ui-widget-content draggable">
+            <p>Drag me </p>
+        </div>
+
+    </div>
+        <div id="droppable" class="ui-widget-header">
+            <p>Drop here</p>
+            <div id="pos"></div>
+        </div>
+    <script>
+        $(function () {
+            var pos = null;
+            var parent = null;
+            var current = null;
+            $(".draggable").draggable({
+                drag: function () {
+                    pos = $(this).offset();
+                    parent = $("#droppable").offset();
+                    current = {
+                        left: pos.left - parent.left,
+                        top: pos.top - parent.top
+                    };
+                    $("#pos").html(current.left + ', ' + current.top);
+
+                }
+            });
+            $("#droppable").droppable({
+                drop: function (event, ui) {
+                    $(this)
+                        .addClass("ui-state-highlight")
+                        .find("p")
+                        .html("Dropped!");
+                    $.ajax({
+                        method: "POST",
+                        url: "insert.php",
+                        data: {
+                            name: current.left,
+                            location: current.top
+                        }
+                    })
+
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>

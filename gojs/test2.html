@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript">
+    </script>
+    <style type="text/css">
+        .draggable-wrap {
+            padding: 50px;
+            background: #ccc;
+        }
+
+        .draggable {
+            position: absolute;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            border: 1px solid #ddd;
+            padding: 30px;
+            cursor: move;
+            font-weight: 600;
+            color: #fff;
+            background: black;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div>
+        <div class="draggable-wrap">
+            <div class="draggable">움직1</div>
+        </div>
+
+        <button onclick="fn_BtnPosition();">값 체크</button>
+        <button onclick="fn_add()";>생성</button>
+    </div>
+
+
+    <script type="text/javascript">
+        var css_zidx = 10;
+
+        $(function () {
+
+            $(".draggable").draggable({
+                create: function (event, ui) {
+                    if ($(this).hasClass("in-parent")) {
+                        $(this).draggable("option", "containment", "parent");
+                    }
+                },
+
+                start: function (event, ui) {
+                    css_zidx++;
+                    $(this).css({
+                        "z-index": css_zidx,
+                        "box-shadow": "0 1px 2px 0 rgba(0,0,0,0.1), 0 4px 8px 0 rgba(0,0,0,0.2)"
+                    });
+                    // 			.draggable( "option", "revert", true );
+                },
+
+                stop: function (event, ui) {
+                    $(this).css({
+                        "box-shadow": ""
+                    });
+                }
+            });
+
+            $(".draggable-wrap").droppable({
+                drop: function (event, ui) {
+                    ui.draggable.draggable("option", "revert", false);
+                }
+            });
+        });
+
+        function fn_BtnPosition() {
+            alert('top : ' + $('.draggable').eq(0).css('top') + ', left : ' + $('.draggable').eq(0).css('left'));
+        }
+
+        function fn_add(){
+            
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+	<title></title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, , maximum-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link type="text/css" rel="stylesheet" href="./css/example.css" />
+
+	<script src="./lib/jquery.js"></script>
+	<script src="./lib/jquery-ui.js"></script>
+	<script src="./lib/jquery.contextmenu.js"></script>
+
+	<script src="../draw2d.js"></script>
+
+	<script src="MyConnection.js"></script>
+
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function () {
+
+			// create the paint area. The id in the constructor must be
+			// an existing DIV
+			var canvas = new draw2d.Canvas("gfx_holder");
+			canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
+			canvas.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
+				createConnection: function () {
+					return new MyConnection();
+				}
+			}));
+
+			// create and add two Node which contains Ports (In and OUT)
+			// var start = new draw2d.shape.node.Start({
+			// 	x: 50,
+			// 	y: 450
+			// });
+			// var end = new draw2d.shape.node.End({
+			// 	x: 230,
+			// 	y: 150
+			// });
+
+			// canvas.add(start);
+			// canvas.add(end);
+
+			// Create a Connection and connect he Start and End node
+			//
+			// var c = new MyConnection({
+			// 	source: start.getOutputPort(0),
+			// 	target: end.getInputPort(0)
+			// });
+			// canvas.add(c);
+			//////////////////////////////////////////////////////////////////////////////////
+			///circle 추가 방법 1
+			var circle = new draw2d.shape.basic.Circle({
+				diameter: 30 //크기 
+			});
+			circle.setStroke(1);
+			circle.setColor("#A63343");
+			circle.setBackgroundColor("#E65159");
+			circle.add(new draw2d.shape.basic.Label({ //text center 
+					text: "Center Label"
+				}),
+				// new draw2d.layout.locator.CenterLocator()
+				new draw2d.layout.locator.BottomLocator()
+			);
+			canvas.add(circle, 600, 200); //x,y 축
+
+			///circle 추가방법 2
+			var circle = new draw2d.shape.basic.Circle({
+				x: 700,
+				y: 200,
+				diameter: 50, //크기
+				stroke: 5, //테두리두께?
+				color: "black", //테두리컬러
+				bgColor: "white" //안쪽 기본 컬러
+			});
+
+			circle.add(
+				new draw2d.shape.basic.Label({
+					text: "Bottom Label"
+				}),
+				new draw2d.layout.locator.BottomLocator(),
+			);
+			//port 붙히는 곳 접지 같은 -극 같은 느낌이랄까..?
+			//XYRelPortLocator - > (x, y%)
+			circle.createPort("input", new draw2d.layout.locator.XYRelPortLocator(-10,50));
+			canvas.add(circle);
+			var aa = {이름 : "나이",나이 : 23}
+			/////////// 커넥션
+			var start = new draw2d.shape.node.Start();
+			start.add(
+				new draw2d.shape.basic.Label({
+					text: aa.이름
+				}), new draw2d.layout.locator.CenterLocator({
+					margin: 10 // distance to the parent shape
+				}));
+			canvas.add(start, 100, 50);
+
+			//create and add two Node which contains Ports (In and OUT)
+			var start = new draw2d.shape.node.Start({
+				x: 50,
+				y: 50
+			});
+			var end = new draw2d.shape.node.End({
+				x: 230,
+				y: 100
+			});
+
+			canvas.add(start);
+			canvas.add(end);
+
+			// Create a Connection and connect he Start and End node
+			//
+			// var c = new draw2d.Connection();
+			// c.setSource(start.getOutputPort(0));
+			// c.setTarget(end.getInputPort(0));
+			// canvas.add(c);
+
+			// // create a label which should attach to the connection
+			// //
+			// var label = new draw2d.shape.basic.Label({text:"I'm a Label"});
+			// label.setColor("#0d0d0d");
+			// label.setFontColor("#0d0d0d");
+			// label.setBackgroundColor("#f0f0f0");
+
+			// // add the decoration to the connection with a ManhattanMidpointLocator.
+			// //
+			// c.add(label, new draw2d.layout.locator.ManhattanMidpointLocator());
+
+
+
+			// 			/////////////////////////////////////////////////////////////////////
+			// 			// JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
+			// 			/////////////////////////////////////////////////////////////////////
+
+			// 			var msg = new draw2d.shape.note.PostIt({
+			// 				text: "Use the context menu of the connection\nto change the color or delete the connection."
+			// 			});
+			// 			canvas.add(msg, 20, 20);
+
+			$("body").scrollTop(0)
+				.scrollLeft(0);
+		});
+	</script>
+
+</head>
+
+<body>
+	<div onselectstart="javascript:/*IE8 hack*/return false" id="gfx_holder" style="width:1500px; height:1500px; ">
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+.modal {
+    width: 300px !important;
+    max-height: 500px !important;
+  }
+  
+  .modal-content {
+    padding: 0px !important;
+  }
+  

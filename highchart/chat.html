@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,26 +11,22 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="./chattest.css">
 
     <!-- Additional files for the Highslide popup effect -->
     <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
     <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" />
     <link rel="stylesheet" href="chart.css"/>
-    
-
 </head>
-
 <body>
-    <figure class="highcharts-figure">
-        <div id="container"></div>
-        <p class="highcharts-description">
-            Chart showing data loaded dynamically. The individual data points can
-            be clicked to display more information.
-        </p>
-    </figure>
-    <script src="./chart.js"></script>
-
+    <div id="container"></div>
+    <div id="highcharts-modal" class="modal">
+        <div class="modal-content">
+          <div id="container2" style="width: 300px; height: 500px;"></div>
+        </div>
+      </div>
+    <button id="button" class="autocompare">reset</button>
+    <script src="./chattest.js"></script>
 </body>
-
 </html>

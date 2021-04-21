@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js-lib/draw2d/lib/draw2d.js"></script>
+    <script src="/css/diagram/block/application.css"></script>
+    <script src="/jquery/jquery.form.js"></script>
+    <script src="/jquery/jquery.number.js"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <div class="top_tab">
+                    <!-- 탭과 네비게이션 <div class="top_tab">로 하나로 묶어주세요. -->
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a onclick="redirectUrl('/diagram/block/editor');" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">계통도 편집</a>
+                        </li>
+                    </ul>
+                    <div class="right-figure">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-plus-top">
+                        <div class="x_panel k-panel conSt" style="height:660px;">
+                            <div class="x_title">
+                                <h2>계통도 편집</h2>
+                                <div class="right-figure">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="btn btn-primary btn-sm" id="sortDiagramBlock">정렬</button>
+                                        </li>                               
+                                        <li>
+                                            <button type="button" class="btn btn-primary btn-sm" id="saveDiagramBlock">저장</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="div_editor">
+                                 <div id="toolbar" class="navbar-default">
+                                   </div>
+                                <div id="side-nav">
+                                    <div id="layer_elements"></div>
+                                    <div id="layer_header" class="highlight panetitle blackgradient">
+                                        <!--<div data-shape="CollapsibleShape"   class="palette_node_element draw2d_droppable">블록</div>
+                                                                <div data-shape="TableShape"   class="palette_node_element draw2d_droppable">블록</div>
+                                                                <div data-shape="StartShape"   class="palette_node_element draw2d_droppable">시작</div>
+                                                                <div data-shape="EndShape"   class="palette_node_element draw2d_droppable">끝</div>-->
+                                        <div data-shape="TableShape" data-group="BLOCK" data-type="L" id="block-l" class="palette_node_element draw2d_droppable">대블록</div>
+                                        <div data-shape="TableShape" data-group="BLOCK" data-type="M" id="block-m" class="palette_node_element draw2d_droppable">중블록</div>
+                                        <div data-shape="TableShape" data-group="BLOCK" data-type="S" id="block-s" class="palette_node_element draw2d_droppable">소블록</div>
+                                        <div data-shape="TableShape" data-group="BLOCK" data-type="J" id="block-j" class="palette_node_element draw2d_droppable">정수장</div>
+                                        
+                                        <div data-shape="TableShape" data-group="TAG" data-type="FRI" id="tag-fri" class="palette_node_element draw2d_droppable">순시유량</div>
+                                        <div data-shape="TableShape" data-group="TAG" data-type="FRD" id="tag-frd" class="palette_node_element draw2d_droppable">적산차<br/>유량</div>
+                                        <div data-shape="TableShape" data-group="TAG" data-type="PRI" id="tag-pri" class="palette_node_element draw2d_droppable">압력</div>
+                                        <div data-shape="TableShape" data-group="TAG" data-type="LEI" id="tag-lei" class="palette_node_element draw2d_droppable">수위</div>
+                                        <div data-shape="TableShape" data-group="TAG" data-type="PRI2" id="tag-pri2" class="palette_node_element draw2d_droppable">감압밸브<br/>2차 압력</div>
+                                        <div data-shape="draw2d.shape.composite.Raft" class="palette_node_element draw2d_droppable">그룹</div>
+                                    </div>
+                                </div>
+                                <div id="propertyPane">
+                                    <div id="propertyHeader" class="highlight panetitle blackgradient">
+                                    </div>
+                                    <div id="properties">
+                                    </div>
+                                </div>
+                                <div style="overflow:scroll;height:620px;width:84.5%;" id="blockDiagram">
+                                    <div id="canvas" style="position:relative; height:20000px;width:10000px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+    </div>
+<script src="/js/daigram/block/Application.js"></script>    
+<script src="/js/daigram/block/BetweenShape.js"></script>    
+<script src="/js/daigram/block/CommandandUnGroup.js"></script>    
+<script src="/js/daigram/block/CommandGroup.js"></script>    
+<script src="/js/daigram/block/editor.js"></script>    
+<script src="/js/daigram/block/PropertyPane.js"></script>    
+<script src="/js/daigram/block/TableShape.js"></script>    
+<script src="/js/daigram/block/Toolbar.js"></script>    
+<script src="/js/daigram/block/view.js"></script>    
+</body>
+</html>
