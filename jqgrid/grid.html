@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jqgrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" type="text/css" href="jqgrid/css/jquery-ui-1.9.2.custom.css">
+    <script>
+        jQuery.browser = {};
+        (function () {
+            jQuery.browser.msie = false;
+            jQuery.browser.version = 0;
+            if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                jQuery.browser.msie = true;
+                jQuery.browser.version = RegExp.$1;
+            }
+        })();
+    </script>
+    <script type="text/javascript" src="jqgrid/js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="jqgrid/js/grid.locale-kr.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <table id="list"></table>
+    <div id="pager"></div>
+
+</body>
+<script src="grid.js"></script>
+</html>
